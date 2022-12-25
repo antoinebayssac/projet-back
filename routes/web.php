@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/filmProfile', '\App\Http\Controllers\PageController@filmProfile');
+Route::get('/albums', '\App\Http\Controllers\PageController@albums');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
