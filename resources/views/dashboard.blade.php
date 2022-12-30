@@ -5,5 +5,9 @@
     <h2>Ajouter/Retirer des films</h2>
 
 
+    <a href="albums">Pages des Albums</a> <br>
+    <a href="filmProfile">Pages du profil des Albums et Films</a>
+
+
 
 </x-app-layout>

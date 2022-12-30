@@ -11,5 +11,7 @@
 
     <h1> filmProfile </h1>
 
+    <h2>Albums visionnés</h2>
+    <h2>Listes d'envies</h2>
 </body>
 </html>
