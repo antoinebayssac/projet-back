@@ -1,7 +1,7 @@
 <nav class="bg-blue border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-black">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
-  <a href="https://flowbite.com/" class="flex items-center">
-      <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+  <a href="index.php" class="flex items-center">
+      <img src="IMG/WEEK'S FILMS.png" class="h-[100px] w-[120px]" alt="Weeks's Films" />
       <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Week's Films</span>
   </a>
 
@@ -51,7 +51,7 @@
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
     <ul class="flex flex-col p-4 mt-4 border bg-black rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-700 bg-black md:dark:bg-black dark:border-black">
       <li>
-        <a href="#" class="block py-2 pl-3 pr-4 text-white bg-gray-700 rounded md:bg-transparent md:text-gray md:p-0 dark:text-gray" aria-current="page">Accueil</a>
+        <a href="index.php" class="block py-2 pl-3 pr-4 text-white bg-gray-700 rounded md:bg-transparent md:text-gray md:p-0 dark:text-gray" aria-current="page">Accueil</a>
       </li>
       <li>
         <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Catégories</a>
