@@ -11,6 +11,12 @@ function queryFilmByGenre(genres) {
 
 }
 
+function queryPopular() {
+    return fetch("https://api.themoviedb.org/3/movie/popular?api_key"+ apikey+ "&language=en-US&page=1")
+        .then(response => response.json());
+}
+
+
 
 let container_genre = document.querySelector("#container_genre")  
 let container_film = document.querySelector("#container_film")  
