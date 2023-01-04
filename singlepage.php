@@ -1,6 +1,12 @@
 <?php session_start();
 require_once 'ressources/user.php';
-require_once 'ressources/connection.php';?>
+require_once 'ressources/connection.php';
+require_once './ressources/utils.php';
+
+if(utils::notconnected()){
+    header("Location: /login.php");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +21,11 @@ require_once 'ressources/connection.php';?>
 
 <?php require_once'./ressources/navbar.php'?>
 
-<div class="container_singlemovie flex flex-row-reverse">
+<div class ="container_namemovie p-2">
+
+</div>
+
+<div class="container_singlemovie flex flex-row-reverse items-center">
 
 </div>
 
@@ -26,6 +36,7 @@ require_once 'ressources/connection.php';?>
 <script type="text/javascript">
 
     let container_single = document.querySelector(".container_singlemovie")
+    let container_name = document.querySelector(".container_namemovie")
 
     fetch("https://api.themoviedb.org/3/movie/" + <?php echo $_GET["id"]?> + "?api_key=" + apikey + "&language=fr-FR")
         .then(response => response.json())
@@ -33,27 +44,36 @@ require_once 'ressources/connection.php';?>
             console.log(movie)
             let card = document.createElement("div")
             card.classList = "w-1/2 flex justify-center h-auto p-8 drop-shadow-xl"
+            let name = document.createElement("div")
+
             let info = document.createElement("div")
-            info.classList = "w-1/2 flex justify-center flex-col pr-20"
+            info.classList = "w-1/2 flex justify-center flex-col bg-gray-200 h-[300px] m-10 p-4 drop-shadow-xl rounded-md"
             container_single.appendChild(info)
             container_single.appendChild(card)
+            container_name.appendChild(name)
             let img = document.createElement("img")
             img.classList = "w-80 min-w-40 h-auto rounded-md"
             img.src="https://image.tmdb.org/t/p/w500" + movie["poster_path"]
             let title = document.createElement("h1")
-            title.innerHTML = movie["title"]
+            title.innerHTML = movie['title']
+            title.classList = "font-bold text-3xl text-center"
             let lang = document.createElement("h2")
-            lang.innerHTML = movie["original_language"]
+            lang.innerHTML = "Langue : " + movie["original_language"]
+            lang.classList = "font-bold"
             let desc = document.createElement("p")
-            desc.innerHTML = movie["overview"]
+            desc.innerHTML = "Description : " + movie["overview"]
+            desc.classList = "font-bold"
             let date = document.createElement("p")
-            date.innerHTML = movie["release_date"]
+            date.innerHTML = "Date : " + movie["release_date"]
+            date.classList = "font-bold"
             let page = document.createElement("p")
-            page.innerHTML = movie["homepage"] 
+            page.innerHTML = "Site : " + movie["homepage"]
+            page.classList = "font-bold" 
             let genre = document.createElement("h3")
-            genre.innerHTML = movie["genre"] 
+            genre.innerHTML = "Genre : " + movie["genre"]
+            genre.classList = "font-bold"
             card.appendChild(img)
-            info.appendChild(title)
+            name.appendChild(title)
             info.appendChild(genre)
             info.appendChild(date)
             info.appendChild(lang)

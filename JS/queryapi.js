@@ -34,19 +34,24 @@ function moovieByGenre(genre){
         }
         data["results"].forEach(film =>{
             let container_div = document.createElement("div")
-            container_div.classList = "w-[300px] h-[400px] bg-red-500 object-cover"
+            container_div.classList = "w-[300px] h-[400px] object-cover"
             container_film.appendChild(container_div)
+            let link = document.createElement("a")
+            link.href ="singlepage.php?" + "&id=" + film["id"]
+            link.classList = "w-full h-full z-10"
+            container_div.appendChild(link)
             let img = document.createElement("img")
             img.src="https://image.tmdb.org/t/p/w500" + film["poster_path"]
             img.classList = "h-[400px] w-[300px] object-cover z-0"
-            container_div.appendChild(img)
-            let link = document.createElement("a")
-            link.href ="singlepage.php?" + "&id=" + film["id"]
-            link.classList = "w-full h-full absolute z-10"
-            container_div.appendChild(link)
+            link.appendChild(img)
         });
+        
     })  
 }
+
+const element = document.querySelector('#get-request .result');
+axios.get('https://api.npms.io/v2/search?q=axios')
+    .then(response => element.innerHTML = response.data.total);
 
 
 
