@@ -1,6 +1,12 @@
 <?php session_start();
 require_once 'ressources/user.php';
-require_once 'ressources/connection.php';?>
+require_once 'ressources/connection.php';
+require_once './ressources/utils.php';
+
+if(utils::notconnected()){
+    header("Location: /login.php");
+}
+?>
 
 
 <!DOCTYPE html>
@@ -16,7 +22,6 @@ require_once 'ressources/connection.php';?>
     <?php require_once'./ressources/navbar.php'?>
 
 <div class="container-box flex">
-
     
     <div class="flex flex-col p-6 pt-[50px] gap-6">
 
