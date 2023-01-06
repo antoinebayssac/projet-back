@@ -69,13 +69,36 @@ class Connection
         ]);
     } 
 
-    public function getAlbumFromID($id)
+    public function getAlbumFromEmail($email)
     {
-        $query =  'SELECT * from Album WHERE email = '.$id;
+        $query =  'SELECT * from Album WHERE email = '.$email;
         $statement = $this->pdo->prepare($query);
         $statement->execute();
 
         $data = $statement->fetchAll();
         return $data;
+    }
+
+    public function getAlbum()
+    {
+        $query =  'SELECT * from Album';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+
+        $data = $statement->fetchAll();
+        return $data;
+    }
+
+
+    public function deleteAlbum(int $id): bool
+    {
+        $query = 'DELETE FROM Album
+                  WHERE id = :id';
+
+        $statement = $this->pdo->prepare($query);
+
+        return $statement->execute([
+            'id' => $id,
+        ]);
     }
 }
