@@ -1,10 +1,7 @@
-<?php
-session_start();
+<?php session_start();
 require_once 'ressources/user.php';
-require_once 'ressources/connection.php'; 
-require_once 'ressources/profil.php';
+require_once 'ressources/connection.php';
 require_once './ressources/utils.php';
-
 
 if(utils::notconnected()){
     header("Location: /login.php");
@@ -13,10 +10,6 @@ if(utils::notconnected()){
 $connection = new Connection();
 $AllAlbums = $connection->getAlbumFromEmail($_SESSION['email']);
 
-if(isset($_POST["deleteAlbum"])){
-    $connection->deleteAlbum($_POST["delete_album"]);
-    header('Location: profil.php');
-}
 ?>
 
 <!DOCTYPE html>
@@ -31,28 +24,20 @@ if(isset($_POST["deleteAlbum"])){
 <body>
     <?php require_once'./ressources/navbar.php'?>
 
-    <h2>Bienvenue <?php echo $_SESSION['first_name']?></h2>
+    <h2>Profil de <?php echo $_SESSION['first_name']?></h2>
 
-    <h2>Mes Albums :</h2>
+    <h2>Ses Albums</h2>
 
     <?php foreach($AllAlbums as $album) {
-        if ($_SESSION['email']==$album['email']){ ?>
+        if ($album['prive'] == 0 ){ ?>
         <div class="">
             <div class="">
-                <h3><?= $album['nom']?></h3>
-                <p><?= $album['prive']?></p>
-                <form method="POST" action="profil.php">
-                    <input type="hidden" name="delete_album" value="<?= $album["id"]; ?>">
-                    <input type="submit" name="deleteAlbum" value="supprimer">
-                </form>
+                <p><?=$album['nom']?></p>
+                <a href="album.php?id=<?=($album['id'])?>">Voir l'album</a>
                 <br>
             </div>
         <?php } ?>
     <?php } ?>
-
-
-
-
     
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
