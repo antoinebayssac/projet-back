@@ -1,3 +1,33 @@
+<?php
+require_once 'ressources/user.php';
+require_once 'ressources/connection.php';
+
+if ($_POST) {
+    $user = new User(
+        $_POST['email'],
+        $_POST['password1'],
+        $_POST['password2'],
+        $_POST['first_name'],
+        $_POST['last_name']
+    );
+
+    if ($user->verify()) {
+        // save to database
+        $connection = new Connection();
+        $result = $connection->insert($user);
+
+        if ($result) {
+            echo '<p>Inscription avec succès !</p>';
+            header("Location: login.php");
+        } else {
+            echo '<p>Erreur interne</p>';
+        }
+    } else {
+        echo '<p>Veuillez remplir correctement le formulaire</p>';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,37 +85,6 @@
           </div>
       </div>
   </div>
-</section>
-
-<?php
-require_once 'ressources/user.php';
-require_once 'ressources/connection.php';
-
-if ($_POST) {
-    $user = new User(
-        $_POST['email'],
-        $_POST['password1'],
-        $_POST['password2'],
-        $_POST['first_name'],
-        $_POST['last_name']
-    );
-
-    if ($user->verify()) {
-        // save to database
-        $connection = new Connection();
-        $result = $connection->insert($user);
-
-        if ($result) {
-            echo '<p>Inscription avec succès !</p>';
-            header("Location: /login.php");
-        } else {
-            echo '<p>Erreur interne</p>';
-        }
-    } else {
-        echo '<p>Veuillez remplir correctement le formulaire</p>';
-    }
-}
-?>
-    
+</section>  
 </body>
 </html>
