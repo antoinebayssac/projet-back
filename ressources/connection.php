@@ -71,8 +71,9 @@ class Connection
 
     public function getAlbumFromEmail($email)
     {
-        $query =  'SELECT * from Album WHERE email = '.$email;
+        $query =  'SELECT * from Album WHERE email = :email';
         $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':email', $email, PDO::PARAM_STR);
         $statement->execute();
 
         $data = $statement->fetchAll();
@@ -100,5 +101,14 @@ class Connection
         return $statement->execute([
             'id' => $id,
         ]);
+    }
+
+    public function getAllUtilisateur(){
+        $query =  'SELECT * from user';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+
+        $data = $statement->fetchAll();
+        return $data;
     }
 }
