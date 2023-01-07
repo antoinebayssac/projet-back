@@ -1,14 +1,16 @@
 const apikey= "b8442a4865b3123e0303b772a7a80077";
-let PopularityInput = document.querySelector("#container_popularity");
 let container_film = document.querySelector("#container_film")
-PopularityInput.addEventListener("click", function () {
-        let url = 'https://api.themoviedb.org/3/movie/popular?api_key=' + apikey + '&language=en-US&page=1'+PopularityInput.value
+
+let TopRatedInput = document.querySelector("#container_top_rates");
+TopRatedInput.addEventListener("click", function () {
+        let url = 'https://api.themoviedb.org/3/movie/top_rated?api_key=' + apikey + '&language=en-US&page=1'+TopRatedInput.value
+
         console.log(url)
         axios.get(url)
             .then(response => {
                 // en cas de réussite de la requête
                 console.log(response.results);
-                console.log(PopularityInput);
+                console.log(TopRatedInput);
                 let film = response.data.results
                 container_film.innerHTML = "";
 
