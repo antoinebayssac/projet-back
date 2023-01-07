@@ -21,6 +21,9 @@ if(utils::notconnected()){
 <body>
     <?php require_once'./ressources/navbar.php'?>
 
+      <!--Search-->
+      <input type="text" placeholder="TEST search" id="search"  >
+
 <div class="container-box flex">
     
     <div class="flex flex-col p-6 pt-[50px] gap-6">
@@ -49,6 +52,8 @@ if(utils::notconnected()){
 
 </div>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="JS/queryapi.js"></script>
+<script src="JS/search.js"></script>
 </body>
 </html>
