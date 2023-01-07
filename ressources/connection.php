@@ -80,6 +80,7 @@ class Connection
         return $data;
     }
 
+
     public function getAlbum()
     {
         $query =  'SELECT * from Album';
@@ -105,10 +106,21 @@ class Connection
 
     public function getAllUtilisateur(){
         $query =  'SELECT * from user';
+
         $statement = $this->pdo->prepare($query);
         $statement->execute();
 
         $data = $statement->fetchAll();
         return $data;
     }
+
+    public function getSoloUser($email){
+        $query = "SELECT * FROM user WHERE email = :email";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+    
+        return $statement->fetchAll();
+    }
+    
 }

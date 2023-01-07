@@ -3,14 +3,22 @@ require_once 'ressources/user.php';
 require_once 'ressources/connection.php';
 require_once './ressources/utils.php';
 
+$connection = new Connection();
+
 if(utils::notconnected()){
     header("Location: /login.php");
 }
 
-$connection = new Connection();
-$AllAlbums = $connection->getAlbumFromEmail($_SESSION['email']);
-
+if (isset($_GET['email'])) {
+    $userEmail = $_GET['email'];
+    $oneuser = $connection->getSoloUser($userEmail);
+    $found = true;
+} else {
+    $found = false;
+}
+$AllAlbums = $connection->getAlbumFromEmail($userEmail);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +32,7 @@ $AllAlbums = $connection->getAlbumFromEmail($_SESSION['email']);
 <body>
     <?php require_once'./ressources/navbar.php'?>
 
-    <h2>Profil de <?php echo $_SESSION['first_name']?></h2>
+    <h2>Profil de <?php echo $oneuser['0']['first_name']?></h2>
 
     <h2>Ses Albums</h2>
 
@@ -33,7 +41,7 @@ $AllAlbums = $connection->getAlbumFromEmail($_SESSION['email']);
         <div class="">
             <div class="">
                 <p><?=$album['nom']?></p>
-                <a href="album.php?id=<?=($album['id'])?>">Voir l'album</a>
+                <a href="singlealbum.php?email=<?=($album['email'])?>">Voir l'album</a>
                 <br>
             </div>
         <?php } ?>
