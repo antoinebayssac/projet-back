@@ -22,14 +22,12 @@ require_once './ressources/utils.php';
     <!--Search-->
 
     <div class="container-box flex">
-
         <div class="flex flex-col p-6 pt-[50px] gap-6">
-
-            <div class="font-bold">
+            <div class="font-bold text-blue-600">
                 Filtre Option
-            <div class="flex flex-col p-6 pt-[50px] gap-6">
-                <!--Popularity-->
-                <input type="text" placeholder="TEST search" id="search">
+            <div class="flex flex-col  pt-[50px] gap-6">
+                <!--SearchBar-->
+                <input type="text" id="search" class="block h-[40px] w-[110px] p-2  text-blue-600  border border-solid border-7 border-blue-700 rounded-lg bg-white " placeholder="Search...">
                 <!--Popularity-->
                 <button id="container_popularity" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" >Popularity<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></button>
                 <!--Reviews-->
