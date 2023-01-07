@@ -2,6 +2,8 @@
 require_once 'ressources/user.php';
 require_once 'ressources/connection.php';
 require_once './ressources/utils.php';
+
+
 ;?>
 
 
@@ -12,14 +14,12 @@ require_once './ressources/utils.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="build.css">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <title>Accueil</title>
 </head>
 <body>
     <?php require_once'./ressources/navbar.php'?>
 
-
-    <input type="text" placeholder="TEST search" id="search"  >
+    <!--Search-->
 
     <div class="container-box flex">
 
@@ -27,15 +27,23 @@ require_once './ressources/utils.php';
 
             <div class="font-bold">
                 Filtre Option
+            <div class="flex flex-col p-6 pt-[50px] gap-6">
+                <!--Popularity-->
+                <input type="text" placeholder="TEST search" id="search">
+                <!--Popularity-->
+                <button id="container_popularity" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" >Popularity<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></button>
+                <!--Reviews-->
+                <button id="container_top_rates" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" >Top Rated<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></button>
+                <!--Genres-->
+                <button class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">Genre<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>                <!--Dropdown Menu-->
+                <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
+                    <ul id=container_genre class="py-1 flex flex-col" aria-labelledby="dropdown">
+                    </ul>
+                </div>
             </div>
 
-            <button class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">Genre<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-
-            <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
-                <ul id=container_genre class="py-1 flex flex-col" aria-labelledby="dropdown">
-                </ul>
             </div>
-        </div>
+            </div>
 
         <div class="flex flex-col pt-[50px]">
             <div class="font-bold text-center text-xl">
@@ -43,21 +51,23 @@ require_once './ressources/utils.php';
             </div>
 
             <div id="container_film" class="flex flex-wrap m-10 justify-center gap-4 z-20">
-
             </div>
         </div>
+        </div>
+
+
 
     </div>
 
 <!--
-         Popularity
-    <div class="flex flex-col p-6 pt-[50px] gap-6">
-        <button id="container_popularity" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" >Popularity<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></button>
+                <!-Popularity->
+    <button id="container_popularity" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" >Popularity<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></button>
+    <!-Reviews->
+    <button id="container_top_rates" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" >Top Rated<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></button>
     </div>-->
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 <script src="JS/search.js"></script>
 <script src="JS/queryapi.js"></script>
 </html>

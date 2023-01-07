@@ -15,13 +15,13 @@ class Connection
         $statement = $this->pdo->prepare($query);
 
         $statement->execute([
-          $email
+            $email
         ]);
         return $statement->fetch();
     }
 
     public function insert(User $user): bool
-    {  
+    {
         $query = 'INSERT INTO user (email, password, first_name, last_name)
                   VALUES (:email, :password, :first_name, :last_name)';
 
@@ -38,7 +38,7 @@ class Connection
     public function connect(String $email, String $password): bool
     {
         $validpassword = false;
-        
+
 
         $query ="SELECT * FROM `user` WHERE `email`= ?";
 
@@ -49,7 +49,7 @@ class Connection
             if(md5($password) == $user["password"]){
                 $validpassword = true;
             }
-            
+
 
         }
         return $validpassword;
@@ -67,15 +67,60 @@ class Connection
             'nom' => $nom,
             'prive' => (int)$prive
         ]);
-    } 
+    }
 
-    public function getAlbumFromID($id)
+    public function getAlbumFromEmail($email)
     {
-        $query =  'SELECT * from Album WHERE email = '.$id;
+        $query =  'SELECT * from Album WHERE email = :email';
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':email', $email, PDO::PARAM_STR);
+        $statement->execute();
+
+        $data = $statement->fetchAll();
+        return $data;
+    }
+
+
+    public function getAlbum()
+    {
+        $query =  'SELECT * from Album';
         $statement = $this->pdo->prepare($query);
         $statement->execute();
 
         $data = $statement->fetchAll();
         return $data;
     }
+
+
+    public function deleteAlbum(int $id): bool
+    {
+        $query = 'DELETE FROM Album
+                  WHERE id = :id';
+
+        $statement = $this->pdo->prepare($query);
+
+        return $statement->execute([
+            'id' => $id,
+        ]);
+    }
+
+    public function getAllUtilisateur(){
+        $query =  'SELECT * from user';
+
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+
+        $data = $statement->fetchAll();
+        return $data;
+    }
+
+    public function getSoloUser($email){
+        $query = "SELECT * FROM user WHERE email = :email";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
 }
