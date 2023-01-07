@@ -6,11 +6,22 @@ class Connection
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:dbname=projet-back;host=127.0.0.1', 'root', '');
+        $this->pdo = new PDO('mysql:dbname=projet-back;host=127.0.0.1', 'root', 'root');
+    }
+
+    public function getinfouser(String $email) :array {
+        $query = 'SELECT last_name, first_name FROM user WHERE email=?';
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute([
+          $email
+        ]);
+        return $statement->fetch();
     }
 
     public function insert(User $user): bool
-    {
+    {  
         $query = 'INSERT INTO user (email, password, first_name, last_name)
                   VALUES (:email, :password, :first_name, :last_name)';
 
@@ -24,10 +35,10 @@ class Connection
         ]);
     }
 
-    public function connect(String $email, String $password): array
+    public function connect(String $email, String $password): bool
     {
         $validpassword = false;
-        $Admin = false;
+        
 
         $query ="SELECT * FROM `user` WHERE `email`= ?";
 
@@ -35,15 +46,36 @@ class Connection
         $statement->execute([$email]);
 
         while($user = $statement->fetch()) {
-            if(md5($password . 'MY_SUPER_SALT') == $user["password"]){
+            if(md5($password) == $user["password"]){
                 $validpassword = true;
             }
-            if ($user["admin"]){
-                $Admin = true;
-            }
+            
 
         }
-        return [$validpassword, $Admin];
+        return $validpassword;
     }
-    
+
+    public function insertalbum(String $email, String $nom, bool $prive): bool
+    {
+        $query = 'INSERT INTO Album (email, nom, prive)
+                  VALUES (:email, :nom, :prive)';
+
+        $statement = $this->pdo->prepare($query);
+
+        return $statement->execute([
+            'email' => $email,
+            'nom' => $nom,
+            'prive' => (int)$prive
+        ]);
+    } 
+
+    public function getAlbumFromID($id)
+    {
+        $query =  'SELECT * from Album WHERE email = '.$id;
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+
+        $data = $statement->fetchAll();
+        return $data;
+    }
 }
