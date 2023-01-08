@@ -123,4 +123,29 @@ class Connection
         return $statement->fetchAll();
     }
 
+    public function AddFilmToAlbum($film_id, $album_id) {
+        if($this->VerifyFilms($film_id, $album_id)){
+            return false;
+        }
+
+        $query = "INSERT INTO films (film_id, album_id)
+        VALUES (:film_id, :album_id)";
+
+        $statement = $this->pdo->prepare($query);
+        return $statement->execute([
+            'film_id' => $film_id,
+            'album_id' => $album_id
+        ]);
+    }
+
+    public function VerifyFilms($film_id, $album_id){
+        $query = "SELECT * FROM films WHERE film_id = :film_id AND :album_id";
+
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([
+            'film_id' => $film_id,
+            'album_id' => $album_id
+        ]);
+        return $statement->rowCount() != 0;
+    }
 }

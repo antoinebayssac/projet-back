@@ -140,7 +140,7 @@ TopRatedInput.addEventListener("click", function () {
             for (let i = 0; i <= response.data.results.length; i++) {
 
                 let container_div = document.createElement("div");
-                container_div.classList = "w-[300px] h-[400px] object-cover";
+                container_div.classList = "w-[300px] h-[400px] object-cover flex flex-col";
 
                 let link = document.createElement("a");
                 link.href = "singlepage.php?" + "&id=" + film["id"];
@@ -148,7 +148,7 @@ TopRatedInput.addEventListener("click", function () {
 
                 let img = document.createElement("img");
                 img.src = "https://image.tmdb.org/t/p/w500" + film[i].poster_path;
-                img.classList = "h-[400px] w-[300px] object-cover z-0";
+                img.classList = "w-[300px] h-[400px] object-cover z-0";
 
                 container_film.appendChild(container_div);
                 container_div.appendChild(link);
@@ -160,5 +160,15 @@ TopRatedInput.addEventListener("click", function () {
         });
 })
 
+// Like Button
+let container_likeButton = document.getElementById('container_likeButton');
+function toggleLikeButton(){
+    if (container_likeButton.style.color =="red") {
+        container_likeButton.style.color = "black"
+    }
+    else{
+        container_likeButton.style.color = "red"
+    }
+}
 
 

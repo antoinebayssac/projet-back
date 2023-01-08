@@ -3,9 +3,6 @@ require_once 'ressources/user.php';
 require_once 'ressources/connection.php';
 require_once './ressources/utils.php';
 
-if(utils::notconnected()){
-    header("Location: /login.php");
-}
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +29,6 @@ if(utils::notconnected()){
 
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="JS/queryapi.js"></script>
-<script src="JS/search.js.js"></script>
-
 
 <script type="text/javascript">
 
@@ -70,7 +65,7 @@ if(utils::notconnected()){
             date.classList = "font-bold"
             let page = document.createElement("p")
             page.innerHTML = "Site : " + movie["homepage"]
-            page.classList = "font-bold" 
+            page.classList = "font-bold"
             let genre = document.createElement("h3")
             genre.innerHTML = "Genre : " + movie["genre"]
             genre.classList = "font-bold"
@@ -81,7 +76,7 @@ if(utils::notconnected()){
             info.appendChild(lang)
             info.appendChild(page)
             info.appendChild(desc)
-        }) 
-</script>   
+        })
+</script>
 </body>
 </html>
