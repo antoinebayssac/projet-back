@@ -40,7 +40,7 @@ if(isset($_POST["deleteAlbum"])){
             <?php foreach($AllAlbums as $album) {
                 if ($_SESSION['email']==$album['email']){ ?>
                     <div class="">
-                        <h3><?= $album['nom']?></h3>
+                        <a href="mesfilms.php"><?= $album['nom']?></a>
                         <p><?= $album['prive']?></p>
                         <form method="POST" action="profil.php">
                             <input type="hidden" name="delete_album" value="<?= $album["id"]; ?>">
@@ -86,8 +86,7 @@ if(isset($_POST["deleteAlbum"])){
                 } else {
                 }
               }
-              
-              
+             
             ?>
         </div>
     </div>

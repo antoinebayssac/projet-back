@@ -59,7 +59,6 @@ searchInput.addEventListener("keyup", function () {
         console.log(url)
         axios.get(url)
             .then(response => {
-                // en cas de réussite de la requête
                 console.log(response.results);
                 console.log(searchInput);
                 let film = response.data.results
@@ -95,7 +94,6 @@ PopularityInput.addEventListener("click", function () {
     console.log(url)
     axios.get(url)
         .then(response => {
-            // en cas de réussite de la requête
             console.log(response.results);
             console.log(PopularityInput);
             let film = response.data.results
