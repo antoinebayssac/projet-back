@@ -6,7 +6,20 @@ require_once './ressources/utils.php';
 if(utils::notconnected()){
     header("Location: /login.php");
 }
-?>
+
+$connection = new Connection();
+$AllAlbums = $connection->getAlbumFromEmail($_SESSION['email']);
+
+if(isset($_POST["submit"])){
+    if(!empty($_POST["addfilms"])){
+        if($connection->AddFilmToAlbum($_GET["id"],$_POST["addfilms"])){
+            echo "a";
+            
+        } else {
+            echo "b";
+        }
+    }
+}?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +42,26 @@ if(utils::notconnected()){
 
 </div>
 
+<div class="flex justify-center w-3/4 gap-5">
+   
+<form method=POST>
+    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+    <select id="countries" name="addfilms" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option selected>Choisissez l'album</option>
+
+        <?php foreach($AllAlbums as $album) {
+                if ($_SESSION['email']==$album['email']){ ?>
+                    <option value="<?= $album["id"]?>">
+                        <?= $album["nom"]?> <?php if($album["prive"]){
+                            echo " (prive)";
+                        }?>
+                    </option>
+            <?php } ?>
+        <?php } ?>
+    </select>
+  <button type="submit" name="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter à l'album</button>
+</form>
+</div>
 
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="JS/queryapi.js"></script>
