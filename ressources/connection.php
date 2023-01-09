@@ -139,13 +139,13 @@ class Connection
     }
 
     public function VerifyFilms($film_id, $album_id){
-        $query = "SELECT * FROM films WHERE film_id = :film_id AND :album_id";
-
+        $query = "SELECT * FROM films WHERE film_id = :film_id AND album_id = :album_id";
+        
         $statement = $this->pdo->prepare($query);
         $statement->execute([
             'film_id' => $film_id,
             'album_id' => $album_id
-        ]);
+        ]); 
         return $statement->rowCount() != 0;
     } 
 }
