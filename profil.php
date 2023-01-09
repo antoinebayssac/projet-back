@@ -40,7 +40,7 @@ if(isset($_POST["deleteAlbum"])){
             <?php foreach($AllAlbums as $album) {
                 if ($_SESSION['email']==$album['email']){ ?>
                     <div class="">
-                        <a href="mesfilms.php"><?= $album['nom']?></a>
+                        <a href="singlealbum.php?id=<?=$album['id']?>"><?=$album['nom']?></a>
                         <p><?= $album['prive']?></p>
                         <form method="POST" action="profil.php">
                             <input type="hidden" name="delete_album" value="<?= $album["id"]; ?>">
@@ -48,8 +48,8 @@ if(isset($_POST["deleteAlbum"])){
                         </form>
                         <br>
                     </div>
-                <?php } ?>
-            <?php } ?>
+                <?php }?>
+            <?php }?>
         </div>
 
         <div class="w-1/2 flex justify-center pt-5">
@@ -90,7 +90,6 @@ if(isset($_POST["deleteAlbum"])){
             ?>
         </div>
     </div>
-
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="JS/queryapi.js"></script>
