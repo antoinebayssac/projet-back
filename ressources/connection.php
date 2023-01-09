@@ -180,6 +180,17 @@ class Connection
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     } 
+
+    public function incrementLikes(int $albumId): bool
+    {
+      $query = "UPDATE album
+                SET likes = likes + 1
+                WHERE id = :id";
+      $statement = $this->pdo->prepare($query);
+      return $statement->execute([
+        'id' => $albumId,
+      ]);
+    }
 }
 
 

@@ -17,6 +17,11 @@ if (isset($_GET['email'])) {
     $found = false;
 }
 $AllAlbums = $connection->getAlbumFromEmail($userEmail);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $albumId = $_POST['album_id'];
+    $connection->incrementLikes($albumId);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +49,25 @@ $AllAlbums = $connection->getAlbumFromEmail($userEmail);
                             <p class="text-lg font-bold"><?=$album['nom']?></p>
                             <a href="singlealbum.php?id=<?=($album['id'])?>" class="text-blue-500 hover:text-blue-600 font-bold">Voir l'album</a>
                     </div>
-                    <button onclick="toggleLikeButton()" id="container_likeButton" class="btn "><i class="fas fa-heart"></i> Like</button>
+                    <button onclick="incrementLikes(<?=$album['id']?>)" id="container_likeButton" class="btn "><i class="fas fa-heart"></i> Like</button>
+
+                    <script>  
+                    function incrementLikes(albumId) {  
+                        fetch("/path/to/server", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            album_id: albumId,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        }).then(response => {
+                        if (response.ok) {
+                            event.target.innerHTML = "Liked!"
+                        }
+                        })
+                    }
+                    </script>
                 </div>
             <?php } ?>
             <?php } ?>      
