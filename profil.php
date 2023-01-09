@@ -45,30 +45,17 @@ if (isset($_POST)){
 <body>
     <?php require_once'./ressources/navbar.php'?>
 
-    <div class="flex flex-row">
-        <div class="w-1/2 flex flex-col items-center">
-            <h2>Bienvenue <?php echo $_SESSION['first_name']?></h2>
+    <!--   TITRE    -->
 
-            <h2>Mes Albums :</h2>
+    <h2 class="text-2xl font-bold pb-4 flex justify-center item-center pt-5">Bienvenue, <?php echo $_SESSION['first_name']?></h2>
 
-            <?php foreach($AllAlbums as $album) {
-                if ($_SESSION['email']==$album['email']){ ?>
-                    <div class="">
-                        <a href="singlealbum.php?id=<?=$album['id']?>"><?=$album['nom']?></a>
-                        <p><?= $album['prive']?></p>
-                        <form method="POST" action="profil.php">
-                            <input type="hidden" name="delete_album" value="<?= $album["id"]; ?>">
-                            <input type="submit" name="deleteAlbum" value="supprimer">
-                        </form>
-                        <br>
-                    </div>
-                <?php }?>
-            <?php }?>
-        </div>
 
-        <div class="w-1/2 flex justify-center pt-5">
+        <div class="w-full flex flex-wrap p-5">
+            <!--    AGE & DESCRIPTION    -->
             <form method=POST>
-                <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="flex flex-col  bg-white h-[270px] w-[300px] justify-center rounded-md shadow-md m-5 px-5">
+                    <h2 class="font-bold">Infos personnelles</h2>
+
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="text" name="age" id="age" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label for="age" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Age</label>
@@ -77,8 +64,30 @@ if (isset($_POST)){
                         <input type="text" name="description" id="description" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label for="description" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
                     </div>
+                    <button type="submit" name="add" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
+
                 </div>
-                <button type="submit" name="add" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
+            </form>
+            <!--   AJOUT ALBUMS    -->
+            <form method="POST">
+                <div class="flex flex-col  bg-white h-[270px] w-[300px] justify-center rounded-md shadow-md m-5 p-5">
+
+                    <div class="font-bold">
+                        <h1>Ajoutez des Albums</h1>
+                    </div>
+                    <div class="mb-6">
+                        <label for="base-input" class=" w-[100px] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Base input</label>
+                        <input name="nom" type="text" id="base-input" class="bg-gray-50 border border-white-300 text-white-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto px-5 py-2.5 dark:bg-blue-700 dark:border-blue-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nom de l'album">
+                    </div>
+
+                    <label class="relative inline-flex items-center mb-4 cursor-pointer">
+                        <input name="private" type="checkbox" value="true" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-green-800 rounded-full dark:bg-gray-400 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                        <span class="ml-3 text-sm font-medium dark:text-blue-800">Privé</span>
+                    </label>
+
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  w-28 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>
+                </div>
             </form>
 
             <?php 
@@ -102,27 +111,29 @@ if (isset($_POST)){
               }
              
             ?>
-        </div>
-    </div>
 
-    <form method="POST">
-    <div class="flex flex-col w-1/2 h-[300px] justify-center items-center p-4">
-        <div class="font-bold">
-            <h1>Ajoutez des Albums</h1>
-        </div>
-        <div class="mb-6">
-            <label for="base-input" class=" w-[100px] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Base input</label>
-            <input name="nom" type="text" id="base-input" class="bg-gray-50 border border-white-300 text-white-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-700 dark:border-blue-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nom de l'album">
+            <div class="bg-white h-full w-[300px] justify-center rounded-md shadow-md m-5 p-5 ">
+                <h2 class="font-bold">Mes Albums :</h2>
+
+                <div class="flex flex-wrap p-5  justify-center  ">
+                    <?php foreach($AllAlbums as $album) {
+                        if ($_SESSION['email']==$album['email']){ ?>
+                            <div class="flex bg-white h-full w-full justify-center  rounded-md shadow-md m-5 p-5">
+                                <form method="POST" action="profil.php" class="flex flex-col justify-center items-center">
+                                    <a href="singlealbum.php?id=<?=$album['id']?>"><?=$album['nom']?></a>
+                                    <p><?= $album['prive']?></p>
+                                    <input type="hidden" name="delete_album" value="<?= $album["id"]; ?>">
+                                    <input type="submit" name="deleteAlbum" value="Supprimer" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none  font-medium rounded-lg text-sm w-28 px-5 py-2.5 text-center items-center dark:bg-blue-600 dark:hover:bg-blue-700">
+                                </form>
+                                <br>
+                            </div>
+                        <?php }?>
+                    <?php }?>
+                </div>
+
         </div>
 
-        <label class="relative inline-flex items-center mb-4 cursor-pointer">
-            <input name="private" type="checkbox" value="true" class="sr-only peer" checked>
-            <div class="w-11 h-6 bg-green-800 rounded-full dark:bg-gray-400 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
-            <span class="ml-3 text-sm font-medium dark:text-blue-800">Privé</span>
-        </label>
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">Ajouter</button>
-    </div>
-    </form>
+
 
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>

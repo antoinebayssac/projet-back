@@ -158,3 +158,13 @@ TopRatedInput.addEventListener("click", function () {
         });
 })
 
+// Like Button
+let container_likeButton = document.getElementById('container_likeButton');
+function toggleLikeButton(){
+    if (container_likeButton.style.color == "red") {
+        container_likeButton.style.color = "black"
+    }
+    else{
+        container_likeButton.style.color = "red"
+    }
+}

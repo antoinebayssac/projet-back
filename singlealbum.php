@@ -3,7 +3,7 @@ session_start();
 require_once 'ressources/user.php';
 require_once 'ressources/connection.php'; 
 require_once 'ressources/profil.php';
-require_once './ressources/utils.php';
+require_once 'ressources/utils.php';
 
 
 if(utils::notconnected()){
@@ -48,13 +48,13 @@ if($_GET && isset($_GET['id'])){
                 })
         </script>
     }
-<?php 
+<?php
     else {
     //rediriger ou faire un truc, mais en gros la page doit pas s'afficher
 } ?>
 
-    
-</body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="JS/queryapi.js"></script>
+</body>
+
 </html>

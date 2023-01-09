@@ -25,6 +25,7 @@ $AllAlbums = $connection->getAlbumFromEmail($userEmail);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f6dcf461c1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
@@ -34,15 +35,16 @@ $AllAlbums = $connection->getAlbumFromEmail($userEmail);
     <div class="container mx-auto p-4">
         <h2 class="text-2xl font-bold mb-4">Profil de <?php echo $oneuser['0']['first_name']?></h2>
 
-        <h2 class="text-2xl font-bold mb-4">Ses Albums</h2>
-        <div class="grid grid-cols-1 gap-4">
+        <h2 class="text-xl font-bold mb-4">Ses Albums</h2>
+        <div class="flex flex-wrap gap-4">
             <?php foreach($AllAlbums as $album) {
                 if ($album['prive'] == 0 ){ ?>
-                <div class="bg-white p-4 rounded-md shadow-md">
+                <div class="bg-white p-4 rounded-md shadow-md w-1/4">
                     <div class="mb-4">
-                        <p class="text-lg font-bold"><?=$album['nom']?></p>
-                        <a href="singlealbum.php?id=<?=($album['id'])?>" class="text-blue-500 hover:text-blue-600 font-bold">Voir l'album</a>
+                            <p class="text-lg font-bold"><?=$album['nom']?></p>
+                            <a href="singlealbum.php?id=<?=($album['id'])?>" class="text-blue-500 hover:text-blue-600 font-bold">Voir l'album</a>
                     </div>
+                    <button onclick="toggleLikeButton()" id="container_likeButton" class="btn "><i class="fas fa-heart"></i> Like</button>
                 </div>
             <?php } ?>
             <?php } ?>      

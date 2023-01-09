@@ -20,19 +20,19 @@ if(utils::notconnected()){
 <body class="bg-gray-100 h-screen">
     <?php require_once'./ressources/navbar.php'?>
 
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto p-4  flex flex-wrap ">
         <?php $connection = new Connection();
             $utilisateurs = $connection->getAllUtilisateur();  
         ?>
 
         <?php foreach($utilisateurs as $utilisateur) { ?>
 
-            <div class="flex flex-col items-center mb-4">
-    <div class="text-2xl font-bold mb-2">
+            <div class="flex flex-col m-4 h-[120px] w-[120px] bg-white p-4 rounded-md shadow-md w-1/4">
+    <div class="text-2xl font-bold pb-4">
         <h3><?= $utilisateur['first_name'] . ' ' .$utilisateur['last_name']?></h3>
     </div>
-    <div class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full">
-        <a href="profiluser.php?email=<?php echo $utilisateur['email']?>" class="text-white hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">Voir le compte</a>
+    <div class="pb-4">
+        <a href="profiluser.php?email=<?php echo $utilisateur['email']?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm w-28 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">Voir le compte</a>
     </div>
 </div>
 <?php } ?>
