@@ -41,7 +41,7 @@ if(utils::notconnected()){
             </div>
             </div>
         <div class="flex flex-col pt-[50px]">
-            <div class="font-bold text-center text-xl">
+            <div class="font-black text-center text-xl">
                 FILM
             </div>
             <div id="container_film" class="flex flex-wrap m-10 justify-center gap-4 z-20">
@@ -49,6 +49,7 @@ if(utils::notconnected()){
         </div>  
         </div>
     </div>
+
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

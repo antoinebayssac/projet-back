@@ -32,13 +32,16 @@ if($_GET && isset($_GET['id'])){
     $db = new Connection();
     $allMovies = $db->getFilmbyID($id);?>
     
+    <div class="font-black text-center text-3xl p-3">
+            <h2>FILMS</h2>
+    </div>
+
     <div class="flex flex-wrap flex-row justify-center">
         <?php
             foreach($allMovies as $movie){
                 if ($movie['film_id']){ ?>
                     <div class="flex">
                             <div class="container_f flex p-4 gap-4">
-                            
                             </div>
                     </div>
                 <script>
@@ -46,6 +49,7 @@ if($_GET && isset($_GET['id'])){
                         .then(data => {
                             console.log(data)
                             let c = document.createElement("div")
+                            let title = document.createElement("h2")
                             let img = document.createElement('img')
                             let link = document.createElement("a")
                             let deleteButton = document.createElement("button")
@@ -54,6 +58,9 @@ if($_GET && isset($_GET['id'])){
 
                             let cont = document.querySelector(".container_f")
                              cont.appendChild(c)
+
+                             title.innerHTML = data["title"]
+                            c.appendChild(title)
 
                             img.src = "https://image.tmdb.org/t/p/w500" + data["poster_path"]
                             c.appendChild(img)
