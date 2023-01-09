@@ -46,10 +46,9 @@ if(utils::notconnected()){
             </div>
             <div id="container_film" class="flex flex-wrap m-10 justify-center gap-4 z-20">
             </div>
-        </div>
+        </div>  
         </div>
     </div>
-
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
