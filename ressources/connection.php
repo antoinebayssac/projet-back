@@ -15,13 +15,13 @@ class Connection
         $statement = $this->pdo->prepare($query);
 
         $statement->execute([
-            $email
+          $email
         ]);
         return $statement->fetch();
     }
 
     public function insert(User $user): bool
-    {
+    {  
         $query = 'INSERT INTO user (email, password, first_name, last_name)
                   VALUES (:email, :password, :first_name, :last_name)';
 
@@ -38,7 +38,7 @@ class Connection
     public function connect(String $email, String $password): bool
     {
         $validpassword = false;
-
+        
 
         $query ="SELECT * FROM `user` WHERE `email`= ?";
 
@@ -49,7 +49,7 @@ class Connection
             if(md5($password) == $user["password"]){
                 $validpassword = true;
             }
-
+            
 
         }
         return $validpassword;
@@ -67,7 +67,7 @@ class Connection
             'nom' => $nom,
             'prive' => (int)$prive
         ]);
-    }
+    } 
 
     public function getAlbumFromEmail($email)
     {
@@ -119,7 +119,7 @@ class Connection
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':email', $email);
         $statement->execute();
-
+    
         return $statement->fetchAll();
     }
 
@@ -139,13 +139,13 @@ class Connection
     }
 
     public function VerifyFilms($film_id, $album_id){
-        $query = "SELECT * FROM films WHERE film_id = :film_id AND :album_id";
-
+        $query = "SELECT * FROM films WHERE film_id = :film_id AND album_id = :album_id";
+        
         $statement = $this->pdo->prepare($query);
         $statement->execute([
             'film_id' => $film_id,
             'album_id' => $album_id
-        ]);
+        ]); 
         return $statement->rowCount() != 0;
-    }
+    } 
 }

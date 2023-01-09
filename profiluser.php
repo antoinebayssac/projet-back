@@ -19,7 +19,6 @@ if (isset($_GET['email'])) {
 $AllAlbums = $connection->getAlbumFromEmail($userEmail);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,24 +28,26 @@ $AllAlbums = $connection->getAlbumFromEmail($userEmail);
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body>
-<?php require_once'./ressources/navbar.php'?>
+<body class="bg-gray-100 h-screen">
+    <?php require_once'./ressources/navbar.php'?>
 
-<h2>Profil de <?php echo $oneuser['0']['first_name']?></h2>
+    <div class="container mx-auto p-4">
+        <h2 class="text-2xl font-bold mb-4">Profil de <?php echo $oneuser['0']['first_name']?></h2>
 
-<h2>Ses Albums</h2>
-
-<?php foreach($AllAlbums as $album) {
-if ($album['prive'] == 0 ){ ?>
-<div class="">
-    <div class="">
-        <p><?=$album['nom']?></p>
-        <a href="singlealbum.php?email=<?=($album['email'])?>">Voir l'album</a>
-        <br>
+        <h2 class="text-2xl font-bold mb-4">Ses Albums</h2>
+        <div class="grid grid-cols-1 gap-4">
+            <?php foreach($AllAlbums as $album) {
+                if ($album['prive'] == 0 ){ ?>
+                <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="mb-4">
+                        <p class="text-lg font-bold"><?=$album['nom']?></p>
+                        <a href="singlealbum.php?id=<?=($album['id'])?>" class="text-blue-500 hover:text-blue-600 font-bold">Voir l'album</a>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php } ?>      
+        </div>
     </div>
-    <?php } ?>
-    <?php } ?>
-
 </body>
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
 <script src="JS/queryapi.js"></script>

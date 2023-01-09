@@ -1,3 +1,33 @@
+<?php
+require_once 'ressources/user.php';
+require_once 'ressources/connection.php';
+
+if ($_POST) {
+    $user = new User(
+        $_POST['email'],
+        $_POST['password1'],
+        $_POST['password2'],
+        $_POST['first_name'],
+        $_POST['last_name']
+    );
+
+    if ($user->verify()) {
+        // save to database
+        $connection = new Connection();
+        $result = $connection->insert($user);
+
+        if ($result) {
+            echo '<p>Inscription avec succès !</p>';
+            header("Location: login.php");
+        } else {
+            echo '<p>Erreur interne</p>';
+        }
+    } else {
+        echo '<p>Veuillez remplir correctement le formulaire</p>';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +44,7 @@
 <section class="bg-neutral-800">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <nav class=" border-gray-200 px-2 sm:px-4 py-2.5">
-            <div class="container flex flex-wrap items-center justify-between mx-auto">
+            <div class="container flex flex-wrap items-center justify-center mx-auto">
                 <a href="index.php" class="flex items-center">
                     <img src="IMG/WEEK'S%20FiLMS.png" class="h-6 mr-3 sm:h-9" alt="Logo" />
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Week's Films</span>
@@ -55,39 +85,6 @@
           </div>
       </div>
   </div>
-</section>
-
-<?php
-require_once 'ressources/user.php';
-require_once 'ressources/connection.php';
-
-if ($_POST) {
-    $user = new User(
-        $_POST['email'],
-        $_POST['password1'],
-        $_POST['password2'],
-        $_POST['first_name'],
-        $_POST['last_name']
-    );
-
-    if ($user->verify()) {
-        // save to database
-        $connection = new Connection();
-        $result = $connection->insert($user);
-
-        if ($result) {
-            echo '<p>Inscription avec succès !</p>';
-            header("Location: login.php");
-        } else {
-            echo '<p>Erreur interne</p>';
-        }
-    } else {
-        echo '<p>Veuillez remplir correctement le formulaire</p>';
-    }
-
-
-}
-?>
-    
+</section>  
 </body>
 </html>

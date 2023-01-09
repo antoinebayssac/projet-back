@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="build.css">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Connexion</title>
 </head>
 <body>
@@ -72,19 +72,21 @@ if ($_POST) {
         $result = $connection->connect($email, $password);
 
         if ($result) {
+            $info = $connection->getinfouser($email);
+            $_SESSION["last_name"] = $info[0];
+            $_SESSION["first_name"] = $info[1];
+            $_SESSION["email"] = $email;
             echo '<p>Connexion avec succès !</p>';
             header("Location: index.php");
-            } else {
-                header('Location: login.php');
-            }
+        } 
+        else {
+           echo '<p>Identifiant Incorrecte !</p>';
         }
-        else{
-            echo 'password invalid';
-        }
-    } else {
-
-        echo '<p> Please enter an email and a valid password !</p>';
     }
+    else{
+        echo 'password invalid';
+    }
+}
 ?>
 </body>
 </html>

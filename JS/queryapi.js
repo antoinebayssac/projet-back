@@ -59,7 +59,6 @@ searchInput.addEventListener("keyup", function () {
         console.log(url)
         axios.get(url)
             .then(response => {
-                // en cas de réussite de la requête
                 console.log(response.results);
                 console.log(searchInput);
                 let film = response.data.results
@@ -95,7 +94,6 @@ PopularityInput.addEventListener("click", function () {
     console.log(url)
     axios.get(url)
         .then(response => {
-            // en cas de réussite de la requête
             console.log(response.results);
             console.log(PopularityInput);
             let film = response.data.results
@@ -140,7 +138,7 @@ TopRatedInput.addEventListener("click", function () {
             for (let i = 0; i <= response.data.results.length; i++) {
 
                 let container_div = document.createElement("div");
-                container_div.classList = "w-[300px] h-[400px] object-cover flex flex-col";
+                container_div.classList = "w-[300px] h-[400px] object-cover";
 
                 let link = document.createElement("a");
                 link.href = "singlepage.php?" + "&id=" + film["id"];
@@ -148,7 +146,7 @@ TopRatedInput.addEventListener("click", function () {
 
                 let img = document.createElement("img");
                 img.src = "https://image.tmdb.org/t/p/w500" + film[i].poster_path;
-                img.classList = "w-[300px] h-[400px] object-cover z-0";
+                img.classList = "h-[400px] w-[300px] object-cover z-0";
 
                 container_film.appendChild(container_div);
                 container_div.appendChild(link);
@@ -159,16 +157,4 @@ TopRatedInput.addEventListener("click", function () {
             console.log("la fonction a bien été executé");
         });
 })
-
-// Like Button
-let container_likeButton = document.getElementById('container_likeButton');
-function toggleLikeButton(){
-    if (container_likeButton.style.color =="red") {
-        container_likeButton.style.color = "black"
-    }
-    else{
-        container_likeButton.style.color = "red"
-    }
-}
-
 
