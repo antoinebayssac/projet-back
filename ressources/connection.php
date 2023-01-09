@@ -93,7 +93,14 @@ class Connection
 
 
     public function deleteAlbum(int $id): bool
-    {
+    {   $query = 'DELETE FROM films
+        WHERE album_id = :id';
+
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([
+            'id' => $id,
+        ]);
+
         $query = 'DELETE FROM Album
                   WHERE id = :id';
 
@@ -103,6 +110,20 @@ class Connection
             'id' => $id,
         ]);
     }
+
+    public function deleteFilmsByAlbumId(int $albumId): bool
+    {
+        $query = 'DELETE FROM films
+                WHERE album_id = :album_id';
+
+        $statement = $this->pdo->prepare($query);
+
+        return $statement->execute([
+            'album_id' => $albumId,
+        ]);
+    }
+
+    
 
     public function getAllUtilisateur(){
         $query =  'SELECT * from user';
