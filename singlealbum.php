@@ -48,6 +48,7 @@ if($_GET && isset($_GET['id'])){
                             let c = document.createElement("div")
                             let img = document.createElement('img')
                             let link = document.createElement("a")
+                            let deleteButton = document.createElement("button")
 
                             c.classList = "flex flex-col text-center"
 
@@ -59,9 +60,20 @@ if($_GET && isset($_GET['id'])){
 
                             link.href = "singlepage.php?id=<?=($movie['film_id'])?>"
                             link.innerHTML = "Voir le film"
-
                             c.appendChild(link)
-                        })
+
+                            deleteButton.innerHTML = "Supprimer le film"
+                            deleteButton.addEventListener("click", () => {
+                            fetch(`singlepage.php?id=<?=($movie['film_id'])?>`, {
+                                method: "DELETE"
+                                }).then(response => {
+                                if (response.ok) {
+                                    c.remove()
+                                }
+                                })
+                            })
+                            c.appendChild(deleteButton)
+                            })
                 </script>
             <?php 
                 } else {
