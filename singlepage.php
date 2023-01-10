@@ -13,10 +13,10 @@ $AllAlbums = $connection->getAlbumFromEmail($_SESSION['email']);
 if(isset($_POST["submit"])){
     if(!empty($_POST["addfilms"])){
         if($connection->AddFilmToAlbum($_GET["id"],$_POST["addfilms"])){
-            echo "a";
+            echo "";
             
         } else {
-            echo "b";
+            echo "Erreur, la requete n'a pas été effectué";
         }
     }
 }?>
@@ -45,10 +45,10 @@ if(isset($_POST["submit"])){
                 <div class="container_singlemovie flex flex-row-reverse items-center">
                     <!-- Affichage de l'affiche du film -->
                 </div>
-                <div class="flex justify-center w-3/4 gap-5 mt-5">
+                <div class="flex flex-col justify-center w-3/4 gap-5 mt-5">
                     <form method="POST" class="w-full max-w-sm">
                         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choisissez une option</label>
-                        <select id="countries" name="addfilms" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="countries" name="addfilms" class="h-[40px] w-[110px] pl-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center">
                             <option selected>Choisissez l'album</option>
                             <?php foreach($AllAlbums as $album) {
                                 if ($_SESSION['email']==$album['email']){ ?>
@@ -60,7 +60,7 @@ if(isset($_POST["submit"])){
                             <?php } ?>
                         <?php } ?>
                         </select>
-                        <button type="submit" name="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter à l'album</button>
+                        <button type="submit" name="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-smh-[40px] w-[110px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter à l'album</button>
                     </form>
                 </div>
             </div>
@@ -81,35 +81,36 @@ fetch("https://api.themoviedb.org/3/movie/" + <?php echo $_GET["id"]?> + "?api_k
     .then(movie => {
         console.log(movie)
         let card = document.createElement("div")
-        card.classList = "w-1/2 flex justify-center h-auto p-8 drop-shadow-xl"
+        card.classList = "w-1/2 flex justify-center h-auto p-8 drop-shadow-xl max-sm:text-[8px] sm:text-[8px] md:text-[10px] lg:text-[12px] max-sm:flex-col "
         let name = document.createElement("div")
 
         let info = document.createElement("div")
-        info.classList = "w-1/2 flex justify-center flex-col h-[300px] m-10 p-4"
+        info.classList = "w-1/2 flex justify-center flex-col h-[300px] m-10 p-4 max-sm:text-[8px] sm:text-[8px] md:text-[10px] lg:text-[12px]"
         container_single.appendChild(info)
         container_single.appendChild(card)
         container_name.appendChild(name)
         let img = document.createElement("img")
-        img.classList = "w-80 min-w-40 h-auto rounded-md"
+        img.classList = "w-80 min-w-40 h-100 rounded-md"
         img.src="https://image.tmdb.org/t/p/w500" + movie["poster_path"]
         let title = document.createElement("h1")
         title.innerHTML = movie['title']
-        title.classList = "font-bold text-3xl text-center"
+        title.classList = "font-bold text-3xl text-center xl:text-[18px] n max-sm:text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]"
         let lang = document.createElement("h2")
         lang.innerHTML = "Langue : " + movie["original_language"]
         lang.classList = "font-bold"
         let desc = document.createElement("p")
         desc.innerHTML = "Description : " + movie["overview"]
-        desc.classList = "font-bold"
+        desc.classList = "font-bold  max-sm:hidden sm:text-[8px] md:text-[10px] lg:text-[12px]"
+
         let date = document.createElement("p")
         date.innerHTML = "Date : " + movie["release_date"]
-        date.classList = "font-bold"
+        date.classList = "font-bold max-sm:text-[8px] sm:text-[8px] md:text-[10px] lg:text-[12px]"
         let page = document.createElement("p")
         page.innerHTML = "Site : " + movie["homepage"]
-        page.classList = "font-bold" 
+        page.classList = "font-bold max-sm:text-[8px] sm:text-[8px] md:text-[10px] lg:text-[12px]"
         let genre = document.createElement("h3")
         genre.innerHTML = "Genre : " + movie["genre"]
-        genre.classList = "font-bold"
+        genre.classList = "font-bold max-sm:text-[8px] sm:text-[8px] md:text-[10px] lg:text-[12px]"
         card.appendChild(img)
         name.appendChild(title)
         info.appendChild(genre)

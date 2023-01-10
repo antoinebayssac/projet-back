@@ -148,4 +148,18 @@ class Connection
         ]); 
         return $statement->rowCount() != 0;
     } 
+
+    public function getFilmbyID($album_id): array{
+        $query = "SELECT * FROM films WHERE album_id = ?";
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute(array($album_id));
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    } 
 }
+
+
+
