@@ -49,6 +49,23 @@ if (isset($_POST)){
 
     <h2 class="text-2xl font-bold pb-4 flex justify-center item-center pt-5">Bienvenue, <?php echo $_SESSION['first_name']?></h2>
 
+    <div class="text-center font-bold">
+        <?php
+        $connection = new Connection();
+        $email = $_SESSION['email'];
+        $stmt = $connection->pdo->prepare('SELECT age, description FROM user WHERE email = :email');
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $user = $stmt->fetch();
+        if (is_array($user)) {
+            echo "Age: " . $user['age'];
+            echo "<br>";
+            echo "Description: " . $user['description'];
+        } else {
+            echo "No result found";
+        }
+        ?>
+    </div>
 
         <div class="w-full flex flex-wrap p-5">
             <!--    AGE & DESCRIPTION    -->
