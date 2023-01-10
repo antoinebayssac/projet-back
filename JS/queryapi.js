@@ -114,7 +114,7 @@ PopularityInput.addEventListener("click", function () {
 
                 container_film.appendChild(container_div);
                 container_div.appendChild(link);
-                container_div.appendChild(img);
+                link.appendChild(img);
             }
         })
         .then(function () {
@@ -150,7 +150,7 @@ TopRatedInput.addEventListener("click", function () {
 
                 container_film.appendChild(container_div);
                 container_div.appendChild(link);
-                container_div.appendChild(img);
+                link.appendChild(img)
             }
         })
         .then(function () {
