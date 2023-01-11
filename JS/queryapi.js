@@ -157,4 +157,3 @@ TopRatedInput.addEventListener("click", function () {
             console.log("la fonction a bien été executé");
         });
 })
-
